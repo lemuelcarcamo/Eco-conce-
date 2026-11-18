@@ -1,1184 +1,362 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eco Conce | Logística Sustentable en Triciclos Eléctricos</title>
-  <style>
-    :root {
-      --primary: #059669;
-      --primary-dark: #064e3b;
-      --primary-light: #d1fae5;
-      --accent: #f59e0b;
-      --dark: #0f172a;
-      --slate: #475569;
-      --bg: #f8fafc;
-      --white: #ffffff;
-      --border: #e2e8f0;
-      --radius: 14px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--dark);
-      line-height: 1.5;
-    }
-
-    /* Navbar */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      padding: 0.75rem 1.25rem;
-    }
-
-    .nav-container {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      text-decoration: none;
-      color: var(--dark);
-      font-weight: 800;
-      font-size: 1.25rem;
-    }
-
-    .brand-icon {
-      background: var(--primary);
-      color: var(--white);
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-    }
-
-    .brand span {
-      color: var(--primary);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.25rem;
-      align-items: center;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--slate);
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .btn {
-      border: none;
-      border-radius: 10px;
-      padding: 0.65rem 1.1rem;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: transform 0.12s ease, background-color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-    }
-
-    .btn:active {
-      transform: scale(0.98);
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: var(--white);
-    }
-
-    .btn-primary:hover {
-      background: #047857;
-    }
-
-    .btn-dark {
-      background: var(--dark);
-      color: var(--white);
-    }
-
-    .btn-dark:hover {
-      background: #1e293b;
-    }
-
-    .btn-outline {
-      background: var(--primary-light);
-      color: var(--primary-dark);
-      border: 1px solid #a7f3d0;
-      padding: 0.4rem 0.75rem;
-      font-size: 0.8rem;
-    }
-
-    /* Hero */
-    .hero {
-      background: linear-gradient(135deg, #064e3b 0%, #065f46 55%, #0f766e 100%);
-      color: var(--white);
-      padding: 3rem 1.25rem 4.5rem;
-    }
-
-    .hero-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .badge {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.14);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #a7f3d0;
-      padding: 0.35rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .hero h1 {
-      font-size: clamp(1.75rem, 4vw, 2.75rem);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 0.85rem;
-    }
-
-    .hero h1 mark {
-      background: none;
-      color: #fbbf24;
-    }
-
-    .hero p {
-      color: #d1fae5;
-      max-width: 650px;
-      margin: 0 auto 2rem;
-      font-size: 1rem;
-    }
-
-    /* Tracking Box */
-    .tracking-card {
-      background: var(--white);
-      color: var(--dark);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      max-width: 720px;
-      margin: 0 auto;
-      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.25);
-      text-align: left;
-    }
-
-    .tracking-form {
-      display: flex;
-      gap: 0.65rem;
-      margin-top: 0.65rem;
-      flex-wrap: wrap;
-    }
-
-    .tracking-input {
-      flex: 1;
-      min-width: 200px;
-      padding: 0.8rem 1rem;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .tracking-input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    .quick-codes {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-top: 0.75rem;
-      font-size: 0.8rem;
-      color: var(--slate);
-    }
-
-    .tracking-result {
-      margin-top: 1.25rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border);
-      display: none;
-    }
-
-    .tracking-result.active {
-      display: block;
-    }
-
-    .progress-bar-bg {
-      background: #e2e8f0;
-      height: 10px;
-      border-radius: 999px;
-      overflow: hidden;
-      margin: 0.75rem 0 0.4rem;
-    }
-
-    .progress-bar-fill {
-      background: var(--primary);
-      height: 100%;
-      transition: width 0.4s ease;
-    }
-
-    .progress-labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--slate);
-      margin-bottom: 1rem;
-    }
-
-    /* Metrics Strip */
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
-
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      margin-top: -2.2rem;
-      position: relative;
-      z-index: 10;
-    }
-
-    .metric-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.15rem;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-    }
-
-    .metric-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--primary-light);
-      color: var(--primary-dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      flex-shrink: 0;
-    }
-
-    .metric-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--slate);
-      text-transform: uppercase;
-    }
-
-    .metric-value {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--dark);
-    }
-
-    /* Sections */
-    section {
-      padding: 3.5rem 0;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .section-title h2 {
-      font-size: 1.85rem;
-      font-weight: 800;
-      margin-bottom: 0.4rem;
-    }
-
-    .section-title p {
-      color: var(--slate);
-      font-size: 0.95rem;
-    }
-
-    /* Quote & Order Layout */
-    .quote-layout {
-      display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
-      gap: 1.5rem;
-      align-items: start;
-    }
-
-    .card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .form-group {
-      margin-bottom: 1rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--slate);
-      margin-bottom: 0.35rem;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 0.7rem 0.85rem;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      background: #f8fafc;
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--primary);
-      background: var(--white);
-    }
-
-    .size-options {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.65rem;
-    }
-
-    .size-btn {
-      border: 2px solid var(--border);
-      background: var(--white);
-      border-radius: 10px;
-      padding: 0.7rem 0.5rem;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .size-btn.selected {
-      border-color: var(--primary);
-      background: var(--primary-light);
-    }
-
-    .size-btn strong {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--dark);
-    }
-
-    .size-btn small {
-      font-size: 0.72rem;
-      color: var(--slate);
-    }
-
-    /* Dark Summary Box */
-    .summary-card {
-      background: var(--dark);
-      color: var(--white);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-    }
-
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.6rem 0;
-      border-bottom: 1px solid #1e293b;
-      font-size: 0.9rem;
-    }
-
-    .summary-row span:first-child {
-      color: #94a3b8;
-    }
-
-    .price-box {
-      background: #1e293b;
-      border-radius: 12px;
-      padding: 1rem;
-      margin: 1.15rem 0;
-    }
-
-    .price-box small {
-      color: #94a3b8;
-      display: block;
-      font-size: 0.78rem;
-    }
-
-    .price-box strong {
-      font-size: 2rem;
-      color: #34d399;
-    }
-
-    .created-alert {
-      display: none;
-      background: rgba(16, 185, 129, 0.16);
-      border: 1px solid #10b981;
-      border-radius: 12px;
-      padding: 1rem;
-      margin-top: 1rem;
-    }
-
-    .created-alert.active {
-      display: block;
-    }
-
-    /* Hubs Grid */
-    .hubs-section {
-      background: #064e3b;
-      color: var(--white);
-    }
-
-    .hubs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1rem;
-    }
-
-    .hub-card {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-    }
-
-    .hub-card h3 {
-      font-size: 1.05rem;
-      margin: 0.4rem 0;
-    }
-
-    .hub-card p {
-      font-size: 0.85rem;
-      color: #a7f3d0;
-      margin-bottom: 0.75rem;
-    }
-
-    /* Eco Calculator for PyMEs */
-    .eco-sim {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      align-items: center;
-    }
-
-    input[type="range"] {
-      width: 100%;
-      accent-color: var(--primary);
-      margin: 0.75rem 0;
-    }
-
-    /* Modal Admin */
-    .modal-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.75);
-      z-index: 200;
-      padding: 1rem;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-backdrop.active {
-      display: flex;
-    }
-
-    .modal-box {
-      background: var(--white);
-      border-radius: var(--radius);
-      max-width: 720px;
-      width: 100%;
-      max-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .modal-header {
-      background: var(--dark);
-      color: var(--white);
-      padding: 1rem 1.25rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-body {
-      padding: 1.25rem;
-      overflow-y: auto;
-    }
-
-    .admin-item {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 0.85rem;
-      margin-bottom: 0.75rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      background: #f8fafc;
-    }
-
-    footer {
-      background: #020617;
-      color: #94a3b8;
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.85rem;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-      .quote-layout, .eco-sim, .form-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eco Conce | Envíos en Triciclos Eléctricos</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+  html { scroll-behavior: smooth; }
+  body { background: #f1f5f9; color: #0f172a; line-height: 1.5; }
+  header { background: linear-gradient(135deg, #064e3b, #059669); color: #fff; padding: 26px 16px; text-align: center; }
+  .hero-svg { width: 130px; height: 80px; margin: 0 auto 8px; display: block; }
+  header h1 { font-size: 1.75rem; font-weight: 800; }
+  header p { font-size: 0.9rem; color: #d1fae5; margin-top: 4px; }
+  
+  .nav-tabs { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; background: #fff; padding: 10px; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 20; }
+  .nav-tabs a { text-decoration: none; color: #064e3b; background: #ecfdf5; font-size: 0.8rem; font-weight: 700; padding: 6px 12px; border-radius: 20px; border: 1px solid #a7f3d0; }
+  
+  .container { max-width: 660px; margin: 16px auto; padding: 0 12px; }
+  .card { background: #fff; border-radius: 14px; padding: 18px; margin-bottom: 16px; border: 1px solid #e2e8f0; box-shadow: 0 2px 6px rgba(15,23,42,0.04); }
+  
+  .cat-head { display: flex; align-items: center; gap: 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 12px; }
+  .cat-ico { width: 42px; height: 42px; background: #ecfdf5; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cat-head h2 { font-size: 1.08rem; color: #064e3b; }
+  .cat-head span { font-size: 0.8rem; color: #64748b; display: block; }
+  
+  label { display: block; font-size: 0.76rem; font-weight: 700; color: #475569; margin-top: 10px; text-transform: uppercase; }
+  input, select, button { width: 100%; padding: 11px; margin-top: 5px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 15px; background: #fff; }
+  input:focus, select:focus { outline: none; border-color: #059669; }
+  
+  button { background: #059669; color: #fff; border: none; font-weight: 700; cursor: pointer; margin-top: 12px; }
+  button:active { transform: scale(0.99); }
+  .btn-dark { background: #0f172a; }
+  .btn-sm { width: auto; padding: 6px 12px; font-size: 0.8rem; background: #d1fae5; color: #064e3b; margin-top: 0; }
+  
+  .pills { margin-top: 10px; font-size: 0.82rem; color: #64748b; }
+  .pill { display: inline-block; background: #ecfdf5; color: #064e3b; border: 1px solid #a7f3d0; padding: 4px 10px; border-radius: 16px; font-weight: 700; margin: 2px; cursor: pointer; }
+  
+  .res-box { background: #f0fdf4; padding: 13px; border-radius: 10px; margin-top: 12px; border-left: 4px solid #059669; font-size: 0.9rem; }
+  .progress-bar { height: 8px; background: #cbd5e1; border-radius: 10px; overflow: hidden; margin: 8px 0; }
+  .progress-fill { height: 100%; background: #059669; transition: width 0.3s; }
+  
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .info-box { background: #f8fafc; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; font-size: 0.84rem; }
+  .hub-item { display: flex; align-items: center; gap: 10px; background: #f8fafc; padding: 11px; border-radius: 10px; margin-bottom: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; }
+  footer { text-align: center; padding: 22px 10px; font-size: 0.8rem; color: #64748b; }
+  @media(max-width:520px){ .grid-2 { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
 
-  <!-- Navegación -->
-  <nav>
-    <div class="nav-container">
-      <a href="#inicio" class="brand">
-        <div class="brand-icon">🚲</div>
-        <div>Eco <span>Conce</span></div>
-      </a>
-      <div class="nav-links">
-        <a href="#inicio">Seguimiento</a>
-        <a href="#cotizar">Cotizar Envío</a>
-        <a href="#cobertura">Puntos Hubs</a>
-        <a href="#pymes">Simulador PyME</a>
+<header>
+  <!-- Ilustración SVG Triciclo Eléctrico -->
+  <svg class="hero-svg" viewBox="0 0 140 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="14" y="18" width="44" height="34" rx="5" fill="#FBBF24"/>
+    <path d="M28 28L36 28L33 35H40L30 46L33 37H26L28 28Z" fill="#064E3B"/>
+    <path d="M58 52H95L84 26H68" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M84 26L92 18H100" stroke="#A7F3D0" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="28" cy="62" r="13" fill="#0F172A" stroke="#A7F3D0" stroke-width="3"/>
+    <circle cx="46" cy="62" r="13" fill="#0F172A" stroke="#A7F3D0" stroke-width="3"/>
+    <circle cx="104" cy="62" r="13" fill="#0F172A" stroke="#A7F3D0" stroke-width="3"/>
+    <path d="M10 77H130" stroke="#34D399" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+  <h1>Eco Conce</h1>
+  <p>Logística Urbana 100% en Triciclos Eléctricos • Gran Concepción</p>
+</header>
+
+<nav class="nav-tabs">
+  <a href="#rastreo">🔍 Rastreo</a>
+  <a href="#cotizador">📦 Cotizador</a>
+  <a href="#beneficios">🌱 Beneficios</a>
+  <a href="#hubs">⚡ Hubs</a>
+  <a href="#admin">🛵 Repartidor</a>
+</nav>
+
+<div class="container">
+
+  <!-- CATEGORÍA 1: RASTREO -->
+  <section id="rastreo" class="card">
+    <div class="cat-head">
+      <div class="cat-ico">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
       </div>
-      <button type="button" class="btn btn-dark" id="openAdminBtn">⚡ Modo Repartidor</button>
-    </div>
-  </nav>
-
-  <!-- Hero & Seguimiento -->
-  <header id="inicio" class="hero">
-    <div class="hero-inner">
-      <div class="badge">🌱 Logística Urbana 100% Eléctrica en el Gran Concepción</div>
-      <h1>Tus envíos urbanos rápidos, seguros y <mark>cero emisiones</mark></h1>
-      <p>Despachamos en triciclos eléctricos de carga entre Concepción, Hualpén, Talcahuano, San Pedro de la Paz, Chiguayante y Penco.</p>
-
-      <div class="tracking-card">
-        <strong style="font-size: 0.95rem;">📍 Rastrea tu encomienda en tiempo real</strong>
-        <div class="tracking-form">
-          <input type="text" id="trackingInput" class="tracking-input" placeholder="Ej: ECO-101">
-          <button type="button" class="btn btn-primary" id="searchOrderBtn">Buscar Envío →</button>
-        </div>
-
-        <div class="quick-codes">
-          <span>Códigos de prueba:</span>
-          <button type="button" class="btn btn-outline quick-btn" data-code="ECO-101">ECO-101</button>
-          <button type="button" class="btn btn-outline quick-btn" data-code="ECO-202">ECO-202</button>
-          <button type="button" class="btn btn-outline quick-btn" data-code="ECO-303">ECO-303</button>
-        </div>
-
-        <div id="trackingResult" class="tracking-result"></div>
+      <div>
+        <h2>1. Seguimiento en Tiempo Real</h2>
+        <span>Consulta el estado y ruta de tu encomienda</span>
       </div>
     </div>
-  </header>
+    <input id="cod" placeholder="Ingresa código (ej: ECO-101)">
+    <button type="button" id="btnBuscar">Rastrear Encomienda</button>
+    <div class="pills">
+      Prueba rápida:
+      <span class="pill" data-code="ECO-101">ECO-101</span>
+      <span class="pill" data-code="ECO-202">ECO-202</span>
+      <span class="pill" data-code="ECO-303">ECO-303</span>
+    </div>
+    <div id="out"></div>
+  </section>
 
-  <!-- Métricas en vivo -->
-  <div class="container">
-    <div class="metrics-grid">
-      <div class="metric-card">
-        <div class="metric-icon">🌿</div>
-        <div>
-          <div class="metric-label">CO₂ Evitado Biobío</div>
-          <div class="metric-value" id="metricCo2">1.480 kg</div>
-        </div>
+  <!-- CATEGORÍA 2: COTIZADOR -->
+  <section id="cotizador" class="card">
+    <div class="cat-head">
+      <div class="cat-ico">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
       </div>
-      <div class="metric-card">
-        <div class="metric-icon">🔋</div>
-        <div>
-          <div class="metric-label">Triciclos Activos</div>
-          <div class="metric-value">18 Unidades</div>
-        </div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon">📦</div>
-        <div>
-          <div class="metric-label">Envíos Registrados</div>
-          <div class="metric-value" id="metricOrders">3 Órdenes</div>
-        </div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon">⏱️</div>
-        <div>
-          <div class="metric-label">Entrega Promedio</div>
-          <div class="metric-value">45 min</div>
-        </div>
+      <div>
+        <h2>2. Cotizador e Ingreso de Envíos</h2>
+        <span>Calcula tarifa CLP y genera código al instante</span>
       </div>
     </div>
-  </div>
 
-  <!-- Cotizador y Creación de Envíos -->
-  <section id="cotizar">
-    <div class="container">
-      <div class="section-title">
-        <h2>Cotiza y Agenda tu Eco-Envío</h2>
-        <p>Calcula el valor en pesos chilenos y genera un código rastreable al instante.</p>
+    <div class="grid-2">
+      <div>
+        <label>Comuna de Origen</label>
+        <select id="ori">
+          <option>Concepción Centro</option><option>Hualpén</option><option>Talcahuano</option>
+          <option>San Pedro de la Paz</option><option>Chiguayante</option><option>Penco</option>
+        </select>
       </div>
+      <div>
+        <label>Comuna de Destino</label>
+        <select id="des">
+          <option>Hualpén</option><option>Concepción Centro</option><option>Talcahuano</option>
+          <option>San Pedro de la Paz</option><option>Chiguayante</option><option>Penco</option>
+        </select>
+      </div>
+    </div>
 
-      <div class="quote-layout">
-        <div class="card">
-          <form id="orderForm">
-            <div class="form-grid">
-              <div class="form-group">
-                <label for="originSelect">Comuna de Origen</label>
-                <select id="originSelect" class="form-control">
-                  <option value="Concepción Centro">Concepción Centro</option>
-                  <option value="Hualpén">Hualpén</option>
-                  <option value="Talcahuano">Talcahuano</option>
-                  <option value="San Pedro de la Paz">San Pedro de la Paz</option>
-                  <option value="Chiguayante">Chiguayante</option>
-                  <option value="Penco">Penco</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="destSelect">Comuna de Destino</label>
-                <select id="destSelect" class="form-control">
-                  <option value="Hualpén">Hualpén</option>
-                  <option value="Concepción Centro">Concepción Centro</option>
-                  <option value="Talcahuano">Talcahuano</option>
-                  <option value="San Pedro de la Paz">San Pedro de la Paz</option>
-                  <option value="Chiguayante">Chiguayante</option>
-                  <option value="Penco">Penco</option>
-                </select>
-              </div>
-            </div>
+    <label>Tamaño de Carga</label>
+    <select id="tam">
+      <option value="0">✉️ Sobre / Documento (hasta 2 kg)</option>
+      <option value="1000">📦 Caja Mediana (hasta 15 kg)</option>
+      <option value="2500">🚛 Carga XL Triciclo (hasta 60 kg)</option>
+    </select>
 
-            <div class="form-group">
-              <label>Tamaño de Carga (Triciclo Eléctrico)</label>
-              <div class="size-options" id="sizeOptions">
-                <div class="size-btn selected" data-size="sobre" data-extra="0" data-label="Sobre / Doc">
-                  <strong>✉️ Sobre</strong>
-                  <small>Hasta 2 kg</small>
-                </div>
-                <div class="size-btn" data-size="caja" data-extra="1000" data-label="Caja Mediana">
-                  <strong>📦 Caja M</strong>
-                  <small>Hasta 15 kg</small>
-                </div>
-                <div class="size-btn" data-size="xl" data-extra="2500" data-label="Carga XL">
-                  <strong>🚛 Carga XL</strong>
-                  <small>Hasta 60 kg</small>
-                </div>
-              </div>
-            </div>
+    <label>Datos de Entrega</label>
+    <input id="rec" placeholder="Nombre del destinatario">
+    <input id="dir" placeholder="Dirección exacta (Calle, número, comuna)">
 
-            <div class="form-grid">
-              <div class="form-group">
-                <label for="senderInput">Nombre Remitente</label>
-                <input type="text" id="senderInput" class="form-control" placeholder="Ej: Camila Rojas" required>
-              </div>
-              <div class="form-group">
-                <label for="receiverInput">Nombre Destinatario</label>
-                <input type="text" id="receiverInput" class="form-control" placeholder="Ej: Matías Soto" required>
-              </div>
-            </div>
+    <div id="precio" class="res-box">
+      Tarifa estimada: <b>$3.490 CLP</b><br>
+      🌱 Huella evitada: <b>1.65 kg de CO₂</b> vs furgón
+    </div>
 
-            <div class="form-group">
-              <label for="addressInput">Dirección de Entrega</label>
-              <input type="text" id="addressInput" class="form-control" placeholder="Ej: Av. Gran Bretaña 4120, Hualpén" required>
-            </div>
+    <button type="button" id="btnCrear">✅ Confirmar y Generar Orden</button>
+    <div id="nuevo"></div>
+  </section>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem; font-size: 1rem;">
-              ✅ Generar Orden de Envío Eléctrico
-            </button>
-          </form>
-        </div>
-
-        <div class="summary-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-            <span style="color: #34d399; font-weight: 800; font-size: 0.85rem; text-transform: uppercase;">Resumen Tarifario</span>
-            <span style="background: rgba(52, 211, 153, 0.15); color: #6ee7b7; padding: 0.25rem 0.65rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700;">Tarifa Verde</span>
-          </div>
-
-          <div class="summary-row">
-            <span>Ruta:</span>
-            <strong id="sumRoute">Concepción Centro → Hualpén</strong>
-          </div>
-          <div class="summary-row">
-            <span>Distancia estimada:</span>
-            <strong id="sumKm">7.5 km</strong>
-          </div>
-          <div class="summary-row">
-            <span>Vehículo:</span>
-            <strong style="color: #fbbf24;">e-Trike Cargo 350W</strong>
-          </div>
-          <div class="summary-row">
-            <span>Huella evitada:</span>
-            <strong id="sumCo2" style="color: #34d399;">1.65 kg CO₂</strong>
-          </div>
-
-          <div class="price-box">
-            <small>Total estimado (IVA incluido)</small>
-            <strong id="sumPrice">$3.490 CLP</strong>
-          </div>
-
-          <div id="createdAlert" class="created-alert">
-            <strong style="color: #6ee7b7; display: block; margin-bottom: 0.35rem;">🎉 ¡Orden registrada con éxito!</strong>
-            <p style="font-size: 0.82rem; color: #e2e8f0; margin-bottom: 0.6rem;">Tu código de seguimiento es:</p>
-            <div style="display: flex; justify-content: space-between; align-items: center; background: #020617; padding: 0.6rem 0.85rem; border-radius: 8px;">
-              <span id="newCodeDisplay" style="font-family: monospace; font-size: 1.1rem; font-weight: 800; color: #fbbf24;">ECO-404</span>
-              <button type="button" class="btn btn-primary" id="trackNewBtn" style="padding: 0.35rem 0.7rem; font-size: 0.78rem;">Rastrear ahora</button>
-            </div>
-          </div>
-        </div>
+  <!-- CATEGORÍA 3: BENEFICIOS -->
+  <section id="beneficios" class="card">
+    <div class="cat-head">
+      <div class="cat-ico">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div>
+        <h2>3. Beneficios Eco Conce</h2>
+        <span>Impacto sustentable en el Gran Concepción</span>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="info-box">
+        <strong>⚡ Cero Emisiones</strong>
+        <p style="font-size:0.8rem; color:#475569; margin-top:4px;">Flota cargada con energía limpia, reduciendo huella de carbono y ruido urbano.</p>
+      </div>
+      <div class="info-box">
+        <strong>🚲 Ciclovías Rápidas</strong>
+        <p style="font-size:0.8rem; color:#475569; margin-top:4px;">Evitamos tacos en puentes y autopistas usando rutas exclusivas intercomunales.</p>
       </div>
     </div>
   </section>
 
-  <!-- Cobertura Hubs Gran Concepción -->
-  <section id="cobertura" class="hubs-section">
-    <div class="container">
-      <div class="section-title">
-        <h2 style="color: white;">Electrolineras y Hubs en el Gran Concepción</h2>
-        <p style="color: #a7f3d0;">Bases de carga solar rápida conectadas a las principales ciclovías intercomunales.</p>
+  <!-- CATEGORÍA 4: HUBS -->
+  <section id="hubs" class="card">
+    <div class="cat-head">
+      <div class="cat-ico">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
       </div>
-      <div class="hubs-grid">
-        <div class="hub-card">
-          <div style="font-size: 1.5rem;">⚡</div>
-          <h3>Hub Plaza Independencia</h3>
-          <p>Concepción Centro • Base central de despacho expreso.</p>
-          <span class="badge" style="margin:0;">6 Triciclos disponibles</span>
-        </div>
-        <div class="hub-card">
-          <div style="font-size: 1.5rem;">⚡</div>
-          <h3>Hub Mall Plaza Trébol</h3>
-          <p>Hualpén / Talcahuano • Eje Autopista y Av. Colón.</p>
-          <span class="badge" style="margin:0;">5 Triciclos disponibles</span>
-        </div>
-        <div class="hub-card">
-          <div style="font-size: 1.5rem;">⚡</div>
-          <h3>Hub Laguna Grande</h3>
-          <p>San Pedro de la Paz • Conexión Puente Llacolén.</p>
-          <span class="badge" style="margin:0;">4 Triciclos disponibles</span>
-        </div>
-        <div class="hub-card">
-          <div style="font-size: 1.5rem;">⚡</div>
-          <h3>Hub Puerto Talcahuano</h3>
-          <p>Centro y Las Higueras • Entregas comerciales y pymes.</p>
-          <span class="badge" style="margin:0;">3 Triciclos disponibles</span>
-        </div>
+      <div>
+        <h2>4. Electrolineras y Hubs</h2>
+        <span>Bases estratégicas de distribución en el Biobío</span>
       </div>
     </div>
+    <div class="hub-item"><span>⚡</span><div><b>Hub Plaza Independencia</b> (Concepción)<br><small>Base central • 6 triciclos disponibles</small></div></div>
+    <div class="hub-item"><span>⚡</span><div><b>Hub Mall Plaza Trébol</b> (Hualpén / Talcahuano)<br><small>Eje Autopista • 5 triciclos disponibles</small></div></div>
+    <div class="hub-item"><span>⚡</span><div><b>Hub Laguna Grande</b> (San Pedro de la Paz)<br><small>Conexión Puente Llacolén • 4 triciclos</small></div></div>
+    <div class="hub-item"><span>⚡</span><div><b>Hub Puerto Talcahuano</b> (Centro / Higueras)<br><small>Comercio y PyMEs • 3 triciclos disponibles</small></div></div>
   </section>
 
-  <!-- Simulador de Impacto para Emprendedores -->
-  <section id="pymes">
-    <div class="container">
-      <div class="card eco-sim">
-        <div>
-          <span class="badge" style="background: var(--primary-light); color: var(--primary-dark);">Calculadora para Tiendas y PyMEs</span>
-          <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Mide tu ahorro mensual con Eco Conce</h2>
-          <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 1rem;">Desliza para indicar cuántos despachos semanales realiza tu emprendimiento en el Gran Concepción:</p>
-          <label style="font-weight: 800; font-size: 1rem;">Envíos por semana: <span id="sliderVal" style="color: var(--primary);">25</span> pedidos</label>
-          <input type="range" id="pymeSlider" min="5" max="150" value="25">
-        </div>
-        <div style="background: #f1f5f9; padding: 1.25rem; border-radius: 12px;">
-          <div style="margin-bottom: 0.85rem;">
-            <small style="color: var(--slate); font-weight: 700; text-transform: uppercase;">CO₂ evitado al mes</small>
-            <div id="pymeCo2" style="font-size: 1.65rem; font-weight: 800; color: var(--primary);">165 kg CO₂</div>
-          </div>
-          <div>
-            <small style="color: var(--slate); font-weight: 700; text-transform: uppercase;">Ahorro estimado vs reparto tradicional</small>
-            <div id="pymeMoney" style="font-size: 1.65rem; font-weight: 800; color: var(--dark);">$85.000 CLP / mes</div>
-          </div>
-        </div>
+  <!-- CATEGORÍA 5: MODO REPARTIDOR -->
+  <section id="admin" class="card">
+    <div class="cat-head">
+      <div class="cat-ico">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </div>
+      <div>
+        <h2>5. Panel de Repartidor</h2>
+        <span>Actualiza estados de entrega en tiempo real</span>
       </div>
     </div>
+    <button type="button" class="btn-dark" id="btnPanel">Mostrar / Ocultar Panel de Ruta</button>
+    <div id="adminList" style="margin-top:10px;"></div>
   </section>
 
-  <!-- Modal Modo Repartidor -->
-  <div id="adminModal" class="modal-backdrop">
-    <div class="modal-box">
-      <div class="modal-header">
-        <strong>🚲 Panel de Repartidores y Gestión de Envíos</strong>
-        <button type="button" class="btn btn-outline" id="closeAdminBtn">Cerrar ✕</button>
-      </div>
-      <div class="modal-body">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: 0.5rem; flex-wrap: wrap;">
-          <p style="font-size: 0.82rem; color: var(--slate);">Cambia el estado de cada paquete y se actualizará al instante en el buscador.</p>
-          <button type="button" class="btn btn-outline" id="resetDataBtn">Restaurar ejemplos</button>
-        </div>
-        <div id="adminList"></div>
-      </div>
-    </div>
-  </div>
+</div>
 
-  <footer>
-    <strong style="color: white; display: block; margin-bottom: 0.3rem;">Eco Conce SpA — Transporte Sustentable en Triciclos Eléctricos</strong>
-    <span>Gran Concepción, Región del Biobío, Chile • 2026</span>
-  </footer>
+<footer>Eco Conce SpA • Transporte Cero Emisiones • Gran Concepción, Biobío • 2026</footer>
 
-  <script>
-    (function () {
-      const STORAGE_KEY = 'ecoConceOrders_v2';
+<script>
+(function() {
+  var STORAGE_KEY = 'ecoconce_pro_v1';
+  var initialData = [
+    { c: 'ECO-101', o: 'Concepción Centro', d: 'Hualpén', r: 'Valentina Muñoz', dir: 'Av. Gran Bretaña 4120', e: 'En triciclo eléctrico', co2: '1.65 kg' },
+    { c: 'ECO-202', o: 'Concepción Centro', d: 'San Pedro de la Paz', r: 'Sebastián Paredes', dir: 'Michimalonco 1150', e: 'Entregado', co2: '1.50 kg' },
+    { c: 'ECO-303', o: 'Chiguayante', d: 'Talcahuano', r: 'Almacén El Faro', dir: 'Colón 540', e: 'En preparación', co2: '3.10 kg' }
+  ];
 
-      const initialOrders = [
-        {
-          code: 'ECO-101',
-          sender: 'Tostaduría Biobío',
-          receiver: 'Valentina Muñoz',
-          origin: 'Concepción Centro',
-          destination: 'Hualpén',
-          address: 'Av. Gran Bretaña 4120, Hualpén',
-          size: 'Caja Mediana',
-          status: 'En triciclo eléctrico',
-          trike: 'Trike #04 (Piloto: Diego V.)',
-          co2: '1.65 kg',
-          price: '$4.465 CLP',
-          note: 'Avanzando por ciclovía Av. Colón'
-        },
-        {
-          code: 'ECO-202',
-          sender: 'Librería Universitaria',
-          receiver: 'Sebastián Paredes',
-          origin: 'Concepción Centro',
-          destination: 'San Pedro de la Paz',
-          address: 'Michimalonco 1150, San Pedro',
-          size: 'Sobre / Doc',
-          status: 'Entregado',
-          trike: 'Trike #11 (Piloto: Carla M.)',
-          co2: '1.50 kg',
-          note: 'Entregado en conserjería'
-        },
-        {
-          code: 'ECO-303',
-          sender: 'Huerto Chiguayante',
-          receiver: 'Almacén El Faro',
-          origin: 'Chiguayante',
-          destination: 'Talcahuano',
-          address: 'Colón 540, Talcahuano',
-          size: 'Carga XL',
-          status: 'En preparación',
-          trike: 'Trike #02 (Hub Chiguayante)',
-          co2: '3.10 kg',
-          note: 'Cargando paquete en contenedor solar'
-        }
-      ];
-
-      function loadOrders() {
-        try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if (!raw) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(initialOrders));
-            return initialOrders.slice();
-          }
-          return JSON.parse(raw);
-        } catch (e) {
-          return initialOrders.slice();
-        }
+  function getDB() {
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
+        return initialData.slice();
       }
+      return JSON.parse(saved);
+    } catch (err) {
+      return initialData.slice();
+    }
+  }
 
-      function saveOrders(list) {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-        } catch (e) {}
-        updateMetrics();
-      }
+  function saveDB(list) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch (err) {}
+  }
 
-      function updateMetrics() {
-        const orders = loadOrders();
-        const countEl = document.getElementById('metricOrders');
-        if (countEl) {
-          countEl.textContent = orders.length + (orders.length === 1 ? ' Orden' : ' Órdenes');
-        }
-      }
+  function buscarCodigo(code) {
+    var c = (code || '').trim().toUpperCase();
+    var out = document.getElementById('out');
+    var list = getDB();
+    var item = list.find(function(x) { return x.c === c; });
 
-      // 1. Seguimiento de pedidos
-      function renderTracking(codeInput) {
-        const cleanCode = (codeInput || '').trim().toUpperCase();
-        const box = document.getElementById('trackingResult');
-        const orders = loadOrders();
-        const found = orders.find(function (item) {
-          return item.code === cleanCode;
-        });
+    if (!item) {
+      out.innerHTML = '<div class="res-box" style="background:#fef2f2;border-color:#dc2626;color:#b91c1c">❌ Código no encontrado. Prueba con <b>ECO-101</b>, <b>ECO-202</b> o <b>ECO-303</b>.</div>';
+      return;
+    }
 
-        box.classList.add('active');
+    var pct = item.e === 'Entregado' ? '100%' : (item.e === 'En triciclo eléctrico' ? '65%' : '30%');
+    out.innerHTML =
+      '<div class="res-box">' +
+      '<b>📦 Código: ' + item.c + '</b> — <span style="color:#059669;font-weight:700;">' + item.e + '</span>' +
+      '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '"></div></div>' +
+      'Ruta: <b>' + item.o + ' → ' + item.d + '</b><br>' +
+      'Destinatario: ' + item.r + ' (' + item.dir + ')<br>' +
+      '🌱 Ahorro: <b>' + item.co2 + ' CO₂ evitados</b></div>';
+  }
 
-        if (!found) {
-          box.innerHTML =
-            '<div style="background:#fef2f2; border:1px solid #fecaca; color:#b91c1c; padding:0.9rem; border-radius:10px; font-size:0.9rem;">' +
-            '<strong>⚠️ Código "' + (cleanCode || 'VACÍO') + '" no encontrado.</strong><br>' +
-            'Verifica el código o prueba con <b>ECO-101</b>, <b>ECO-202</b> o <b>ECO-303</b>.' +
-            '</div>';
-          return;
-        }
+  function actualizarCotizacion() {
+    var o = document.getElementById('ori').value;
+    var d = document.getElementById('des').value;
+    var ex = parseInt(document.getElementById('tam').value, 10) || 0;
+    var p = (o === d ? 2790 : 3490) + ex;
+    var co2 = (o === d ? 0.85 : 1.65).toFixed(2);
+    document.getElementById('precio').innerHTML =
+      'Tarifa estimada: <b>$' + p.toLocaleString('es-CL') + ' CLP</b><br>' +
+      '🌱 Huella evitada: <b>' + co2 + ' kg de CO₂</b> vs furgón';
+  }
 
-        let pct = 33;
-        let pillBg = '#fef3c7';
-        let pillColor = '#92400e';
+  function crearOrden() {
+    var r = document.getElementById('rec').value.trim();
+    var dir = document.getElementById('dir').value.trim();
+    if (!r || !dir) {
+      alert('Por favor ingresa el nombre del destinatario y la dirección.');
+      return;
+    }
+    var o = document.getElementById('ori').value;
+    var d = document.getElementById('des').value;
+    var list = getDB();
+    var newCode = 'ECO-' + (400 + list.length + 1);
+    var co2 = (o === d ? 0.85 : 1.65).toFixed(2) + ' kg';
 
-        if (found.status === 'En triciclo eléctrico') {
-          pct = 68;
-          pillBg = '#e0f2fe';
-          pillColor = '#075985';
-        } else if (found.status === 'Entregado') {
-          pct = 100;
-          pillBg = '#d1fae5';
-          pillColor = '#065f46';
-        }
+    list.unshift({ c: newCode, o: o, d: d, r: r, dir: dir, e: 'En preparación', co2: co2 });
+    saveDB(list);
 
-        box.innerHTML =
-          '<div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:1rem;">' +
-            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">' +
-              '<div><small style="color:#64748b; font-weight:700;">CÓDIGO DE RASTREO</small><h3 style="font-size:1.25rem;">' + found.code + '</h3></div>' +
-              '<span style="background:' + pillBg + '; color:' + pillColor + '; padding:0.35rem 0.75rem; border-radius:999px; font-size:0.8rem; font-weight:800;">' + found.status + '</span>' +
-            '</div>' +
-            '<div class="progress-bar-bg"><div class="progress-bar-fill" style="width:' + pct + '%;"></div></div>' +
-            '<div class="progress-labels"><span>1. Preparación</span><span>2. En triciclo</span><span>3. Entregado</span></div>' +
-            '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:0.6rem; background:white; padding:0.85rem; border-radius:10px; border:1px solid #e2e8f0; font-size:0.85rem;">' +
-              '<div><span style="color:#64748b;">Ruta:</span><br><strong>' + found.origin + ' → ' + found.destination + '</strong></div>' +
-              '<div><span style="color:#64748b;">Destinatario:</span><br><strong>' + found.receiver + '</strong></div>' +
-              '<div><span style="color:#64748b;">Vehículo:</span><br><strong style="color:#059669;">' + found.trike + '</strong></div>' +
-              '<div><span style="color:#64748b;">Ahorro CO₂:</span><br><strong style="color:#059669;">🌱 ' + found.co2 + ' evitados</strong></div>' +
-            '</div>' +
-            '<p style="font-size:0.8rem; color:#475569; margin-top:0.65rem;">🕒 Reporte: <strong>' + found.note + '</strong> (' + found.address + ')</p>' +
-          '</div>';
-      }
+    document.getElementById('nuevo').innerHTML =
+      '<div class="res-box">✅ Orden creada con éxito: <b>' + newCode + '</b>. ' +
+      '<button type="button" class="btn-sm" id="btnVerNueva" style="margin-left:6px;">Rastrear ahora</button></div>';
 
-      document.getElementById('searchOrderBtn').addEventListener('click', function () {
-        renderTracking(document.getElementById('trackingInput').value);
+    document.getElementById('btnVerNueva').onclick = function() {
+      document.getElementById('cod').value = newCode;
+      buscarCodigo(newCode);
+      document.getElementById('rastreo').scrollIntoView();
+    };
+
+    document.getElementById('rec').value = '';
+    document.getElementById('dir').value = '';
+  }
+
+  var panelAbierto = false;
+  function renderPanel() {
+    var box = document.getElementById('adminList');
+    if (!panelAbierto) {
+      box.innerHTML = '';
+      return;
+    }
+    var list = getDB();
+    box.innerHTML = '';
+    list.forEach(function(item, idx) {
+      var div = document.createElement('div');
+      div.className = 'hub-item';
+      div.style.display = 'block';
+      div.innerHTML = '<b>' + item.c + '</b> (' + item.o + ' → ' + item.d + ') — ' + item.r;
+
+      var sel = document.createElement('select');
+      sel.style.marginTop = '6px';
+      ['En preparación', 'En triciclo eléctrico', 'Entregado'].forEach(function(st) {
+        var opt = document.createElement('option');
+        opt.value = st;
+        opt.textContent = st;
+        if (item.e === st) opt.selected = true;
+        sel.appendChild(opt);
       });
 
-      document.getElementById('trackingInput').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          renderTracking(this.value);
+      sel.onchange = function() {
+        var cur = getDB();
+        cur[idx].e = this.value;
+        saveDB(cur);
+        if (document.getElementById('cod').value.trim().toUpperCase() === cur[idx].c) {
+          buscarCodigo(cur[idx].c);
         }
-      });
-
-      const quickButtons = document.querySelectorAll('.quick-btn');
-      quickButtons.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          const code = this.getAttribute('data-code');
-          document.getElementById('trackingInput').value = code;
-          renderTracking(code);
-        });
-      });
-
-      // 2. Cotizador y selección de tamaño
-      let selectedExtra = 0;
-      let selectedLabel = 'Sobre / Doc';
-
-      const sizeBtns = document.querySelectorAll('.size-btn');
-      sizeBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          sizeBtns.forEach(function (b) { b.classList.remove('selected'); });
-          this.classList.add('selected');
-          selectedExtra = parseInt(this.getAttribute('data-extra'), 10) || 0;
-          selectedLabel = this.getAttribute('data-label') || 'Sobre / Doc';
-          recalculateQuote();
-        });
-      });
-
-      const routeDistances = {
-        'Concepción Centro-Concepción Centro': 3.2,
-        'Concepción Centro-Hualpén': 7.5,
-        'Concepción Centro-Talcahuano': 12.0,
-        'Concepción Centro-San Pedro de la Paz': 6.8,
-        'Concepción Centro-Chiguayante': 9.5,
-        'Concepción Centro-Penco': 11.2,
-        'Hualpén-Talcahuano': 5.4,
-        'Hualpén-San Pedro de la Paz': 8.9
       };
 
-      function recalculateQuote() {
-        const origin = document.getElementById('originSelect').value;
-        const dest = document.getElementById('destSelect').value;
-        const km = routeDistances[origin + '-' + dest] || routeDistances[dest + '-' + origin] || 8.5;
-        const price = 2490 + Math.round(km * 130) + selectedExtra;
-        const co2 = (km * 0.22).toFixed(2);
+      div.appendChild(sel);
+      box.appendChild(div);
+    });
+  }
 
-        document.getElementById('sumRoute').textContent = origin + ' → ' + dest;
-        document.getElementById('sumKm').textContent = km.toFixed(1) + ' km';
-        document.getElementById('sumCo2').textContent = co2 + ' kg CO₂';
-        document.getElementById('sumPrice').textContent = '$' + price.toLocaleString('es-CL') + ' CLP';
+  document.getElementById('btnBuscar').onclick = function() {
+    buscarCodigo(document.getElementById('cod').value);
+  };
 
-        return { origin: origin, dest: dest, km: km, price: price, co2: co2 };
-      }
+  var pills = document.querySelectorAll('.pill');
+  pills.forEach(function(p) {
+    p.onclick = function() {
+      var c = this.getAttribute('data-code');
+      document.getElementById('cod').value = c;
+      buscarCodigo(c);
+    };
+  });
 
-      document.getElementById('originSelect').addEventListener('change', recalculateQuote);
-      document.getElementById('destSelect').addEventListener('change', recalculateQuote);
+  document.getElementById('ori').onchange = actualizarCotizacion;
+  document.getElementById('des').onchange = actualizarCotizacion;
+  document.getElementById('tam').onchange = actualizarCotizacion;
+  document.getElementById('btnCrear').onclick = crearOrden;
 
-      // 3. Crear nueva orden
-      let lastGeneratedCode = '';
+  document.getElementById('btnPanel').onclick = function() {
+    panelAbierto = !panelAbierto;
+    renderPanel();
+  };
 
-      document.getElementById('orderForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-        const q = recalculateQuote();
-        const orders = loadOrders();
-        const newCode = 'ECO-' + (400 + orders.length + 1);
-
-        const newOrder = {
-          code: newCode,
-          sender: document.getElementById('senderInput').value.trim(),
-          receiver: document.getElementById('receiverInput').value.trim(),
-          origin: q.origin,
-          destination: q.dest,
-          address: document.getElementById('addressInput').value.trim(),
-          size: selectedLabel,
-          status: 'En preparación',
-          trike: 'Trike #08 (Asignación automática)',
-          co2: q.co2 + ' kg',
-          price: '$' + q.price.toLocaleString('es-CL') + ' CLP',
-          note: 'Orden recién ingresada al sistema Eco Conce'
-        };
-
-        orders.unshift(newOrder);
-        saveOrders(orders);
-
-        lastGeneratedCode = newCode;
-        document.getElementById('newCodeDisplay').textContent = newCode;
-        document.getElementById('createdAlert').classList.add('active');
-        this.reset();
-        recalculateQuote();
-      });
-
-      document.getElementById('trackNewBtn').addEventListener('click', function () {
-        if (lastGeneratedCode) {
-          document.getElementById('trackingInput').value = lastGeneratedCode;
-          renderTracking(lastGeneratedCode);
-          document.getElementById('inicio').scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-
-      // 4. Simulador PyMEs
-      const slider = document.getElementById('pymeSlider');
-      slider.addEventListener('input', function () {
-        const weekly = parseInt(this.value, 10);
-        document.getElementById('sliderVal').textContent = weekly;
-        const monthlyCo2 = Math.round(weekly * 4 * 1.65);
-        const monthlySavings = (weekly * 4 * 850).toLocaleString('es-CL');
-        document.getElementById('pymeCo2').textContent = monthlyCo2 + ' kg CO₂';
-        document.getElementById('pymeMoney').textContent = '$' + monthlySavings + ' CLP / mes';
-      });
-
-      // 5. Modo Repartidor (Modal)
-      const adminModal = document.getElementById('adminModal');
-
-      function renderAdminList() {
-        const orders = loadOrders();
-        const container = document.getElementById('adminList');
-        container.innerHTML = '';
-
-        orders.forEach(function (ord, index) {
-          const row = document.createElement('div');
-          row.className = 'admin-item';
-
-          const info = document.createElement('div');
-          info.innerHTML =
-            '<strong style="color:#059669; font-family:monospace; font-size:0.95rem;">' + ord.code + '</strong> ' +
-            '<span style="font-size:0.82rem; color:#475569;">(' + ord.origin + ' → ' + ord.destination + ')</span><br>' +
-            '<span style="font-size:0.82rem;">Para: <strong>' + ord.receiver + '</strong> — ' + ord.address + '</span>';
-
-          const select = document.createElement('select');
-          select.className = 'form-control';
-          select.style.width = 'auto';
-          select.style.fontWeight = '700';
-
-          ['En preparación', 'En triciclo eléctrico', 'Entregado'].forEach(function (st) {
-            const opt = document.createElement('option');
-            opt.value = st;
-            opt.textContent = st;
-            if (ord.status === st) opt.selected = true;
-            select.appendChild(opt);
-          });
-
-          select.addEventListener('change', function () {
-            const currentOrders = loadOrders();
-            currentOrders[index].status = this.value;
-            currentOrders[index].note = 'Actualizado por repartidor: ' + this.value;
-            saveOrders(currentOrders);
-
-            const searched = document.getElementById('trackingInput').value.trim().toUpperCase();
-            if (searched === currentOrders[index].code) {
-              renderTracking(searched);
-            }
-          });
-
-          row.appendChild(info);
-          row.appendChild(select);
-          container.appendChild(row);
-        });
-      }
-
-      document.getElementById('openAdminBtn').addEventListener('click', function () {
-        renderAdminList();
-        adminModal.classList.add('active');
-      });
-
-      document.getElementById('closeAdminBtn').addEventListener('click', function () {
-        adminModal.classList.remove('active');
-      });
-
-      document.getElementById('resetDataBtn').addEventListener('click', function () {
-        saveOrders(initialOrders.slice());
-        renderAdminList();
-      });
-
-      // Inicializar
-      recalculateQuote();
-      updateMetrics();
-    })();
-  </script>
+  actualizarCotizacion();
+})();
+</script>
 </body>
 </html>
