@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eco Conce | App Logística Sustentable</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+  body { background: #f1f5f9; color: #0f172a; line-height: 1.5; padding-bottom: 30px; }
+  
+  /* Encabezado con animación del triciclo */
+  header { background: linear-gradient(135deg, #064e3b, #059669); color: #fff; padding: 24px 16px 20px; text-align: center; overflow: hidden; }
+  .hero-svg { width: 140px; height: 85px; margin: 0 auto 6px; display: block; animation: rodar 2.5s ease-in-out infinite; }
+  @keyframes rodar {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-4px) rotate(-1.5deg); }
+  }
+  .wheel { transform-origin: center; animation: girar 1.5s linear infinite; }
+  header h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; }
+  header p { font-size: 0.88rem; color: #d1fae5; margin-top: 2px; }
+  .live-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.22); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-top: 8px; color: #a7f3d0; }
+  .dot { width: 8px; height: 8px; background: #34d399; border-radius: 50%; animation: pulso 1.4s infinite; }
+  @keyframes pulso { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.3); } }
+
+  /* Menú de Pestañas Separadas */
+  .nav-tabs { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; background: #fff; padding: 10px 8px; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 20; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
+  .tab-btn { background: #f8fafc; color: #475569; border: 1px solid #cbd5e1; font-size: 0.82rem; font-weight: 700; padding: 8px 13px; border-radius: 20px; cursor: pointer; transition: all 0.2s ease; }
+  .tab-btn.active { background: #059669; color: #fff; border-color: #059669; transform: translateY(-1px); box-shadow: 0 3px 8px rgba(5,150,105,0.25); }
+
+  /* Vistas Separadas por Categoría */
+  .container { max-width: 650px; margin: 16px auto; padding: 0 12px; }
+  .view { display: none; animation: aparecer 0.28s ease-out; }
+  .view.active { display: block; }
+  @keyframes aparecer { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card { background: #fff; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(15,23,42,0.04); }
+  .cat-head { display: flex; align-items: center; gap: 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; margin-bottom: 14px; }
+  .cat-ico { width: 44px; height: 44px; background: #ecfdf5; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cat-head h2 { font-size: 1.15rem; color: #064e3b; }
+  .cat-head span { font-size: 0.8rem; color: #64748b; display: block; }
+
+  label { display: block; font-size: 0.76rem; font-weight: 700; color: #475569; margin-top: 10px; text-transform: uppercase; }
+  input, select, .action-btn { width: 100%; padding: 12px; margin-top: 5px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 15px; background: #fff; transition: border 0.2s, transform 0.1s; }
+  input:focus, select:focus { outline: none; border-color: #059669; }
+  .action-btn { background: #059669; color: #fff; border: none; font-weight: 700; cursor: pointer; margin-top: 14px; }
+  .action-btn:active { transform: scale(0.98); }
+  .btn-dark { background: #0f172a; }
+  .btn-sm { width: auto; padding: 6px 12px; font-size: 0.8rem; background: #d1fae5; color: #064e3b; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; }
+
+  .pills { margin-top: 12px; font-size: 0.82rem; color: #64748b; }
+  .pill { display: inline-block; background: #ecfdf5; color: #064e3b; border: 1px solid #a7f3d0; padding: 5px 11px; border-radius: 16px; font-weight: 700; margin: 3px 2px; cursor: pointer; transition: transform 0.15s; }
+  .pill:active { transform: scale(0.95); }
+
+  .res-box { background: #f0fdf4; padding: 14px; border-radius: 12px; margin-top: 14px; border-left: 4px solid #059669; font-size: 0.9rem; animation: aparecer 0.25s ease; }
+  .progress-bar { height: 10px; background: #cbd5e1; border-radius: 10px; overflow: hidden; margin: 10px 0 4px; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #059669, #34d399); transition: width 0.5s ease; }
+  .steps { display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 700; color: #64748b; margin-bottom: 10px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat-card { background: #f8fafc; padding: 14px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center; }
+  .stat-card strong { display: block; font-size: 1.35rem; color: #059669; }
+  .stat-card span { font-size: 0.78rem; color: #475569; font-weight: 600; }
+
+  .hub-item { background: #f8fafc; padding: 12px; border-radius: 12px; margin-bottom: 10px; border: 1px solid #e2e8f0; font-size: 0.88rem; }
+  .hub-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .badge-ok { background: #d1fae5; color: #065f46; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 10px; }
+  footer { text-align: center; padding: 20px 10px; font-size: 0.8rem; color: #64748b; }
+  @media(max-width:520px){ .grid-2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <!-- Ilustración SVG Triciclo Eléctrico Animado -->
+  <svg class="hero-svg" viewBox="0 0 140 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="14" y="18" width="44" height="34" rx="5" fill="#FBBF24"/>
+    <path d="M28 28L36 28L33 35H40L30 46L33 37H26L28 28Z" fill="#064E3B"/>
+    <path d="M58 52H95L84 26H68" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M84 26L92 18H100" stroke="#A7F3D0" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="28" cy="62" r="13" fill="#0F172A" stroke="#A7F3D0" stroke-width="3"/>
+    <circle cx="46" cy="62" r="13" fill="#0F172A" stroke="#A7F3D0" stroke-width="3"/>
+    <circle cx="104" cy="62" r="13" fill="#0F172A" stroke="#A7F3D0" stroke-width="3"/>
+    <path d="M10 77H130" stroke="#34D399" stroke-width="3" stroke-linecap="round" stroke-dasharray="14 8"/>
+  </svg>
+  <h1>Eco Conce</h1>
+  <p>Logística Urbana 100% Eléctrica • Gran Concepción</p>
+  <div class="live-badge"><span class="dot"></span> 18 Triciclos en Ruta Ahora</div>
+</header>
+
+<!-- Navegación por Categorías Separadas -->
+<nav class="nav-tabs">
+  <button type="button" class="tab-btn active" data-tab="view-rastreo">🔍 Rastreo</button>
+  <button type="button" class="tab-btn" data-tab="view-cotizar">📦 Cotizar</button>
+  <button type="button" class="tab-btn" data-tab="view-impacto">🌱 Impacto</button>
+  <button type="button" class="tab-btn" data-tab="view-hubs">⚡ Hubs</button>
+  <button type="button" class="tab-btn" data-tab="view-admin">🛵 Repartidor</button>
+</nav>
+
+<div class="container">
+
+  <!-- VISTA 1: RASTREO -->
+  <section id="view-rastreo" class="view active">
+    <div class="card">
+      <div class="cat-head">
+        <div class="cat-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        </div>
+        <div>
+          <h2>Seguimiento en Tiempo Real</h2>
+          <span>Consulta ubicación, piloto asignado y avance</span>
+        </div>
+      </div>
+      <input id="cod" placeholder="Ingresa código (ej: ECO-101)">
+      <button type="button" class="action-btn" id="btnBuscar">Rastrear Encomienda</button>
+      <div class="pills">
+        Códigos activos de prueba:
+        <span class="pill" data-code="ECO-101">ECO-101</span>
+        <span class="pill" data-code="ECO-202">ECO-202</span>
+        <span class="pill" data-code="ECO-303">ECO-303</span>
+      </div>
+      <div id="out"></div>
+    </div>
+  </section>
+
+  <!-- VISTA 2: COTIZADOR -->
+  <section id="view-cotizar" class="view">
+    <div class="card">
+      <div class="cat-head">
+        <div class="cat-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div>
+          <h2>Cotizador e Ingreso de Envíos</h2>
+          <span>Tarifas transparentes en CLP para el Gran Concepción</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label>Comuna de Origen</label>
+          <select id="ori">
+            <option>Concepción Centro</option><option>Hualpén</option><option>Talcahuano</option>
+            <option>San Pedro de la Paz</option><option>Chiguayante</option><option>Penco</option>
+          </select>
+        </div>
+        <div>
+          <label>Comuna de Destino</label>
+          <select id="des">
+            <option>Hualpén</option><option>Concepción Centro</option><option>Talcahuano</option>
+            <option>San Pedro de la Paz</option><option>Chiguayante</option><option>Penco</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Tipo y Capacidad de Carga</label>
+      <select id="tam">
+        <option value="0">✉️ Sobre / Documento (hasta 2 kg • Entrega Exprés)</option>
+        <option value="1000">📦 Caja Mediana (hasta 15 kg • Baúl Térmico)</option>
+        <option value="2500">🚛 Carga XL PyME (hasta 60 kg • Tolva Reforzada)</option>
+      </select>
+
+      <label>Datos del Destinatario</label>
+      <input id="rec" placeholder="Nombre completo de quien recibe">
+      <input id="dir" placeholder="Dirección exacta (Calle, número, depto/local)">
+
+      <div id="precio" class="res-box">
+        Tarifa estimada: <b>$3.490 CLP</b><br>
+        ⏱️ Tiempo estimado: <b>45 min</b> • 🌱 Ahorro: <b>1.65 kg CO₂</b>
+      </div>
+
+      <button type="button" class="action-btn" id="btnCrear">✅ Confirmar y Generar Orden</button>
+      <div id="nuevo"></div>
+    </div>
+  </section>
+
+  <!-- VISTA 3: IMPACTO Y SIMULADOR -->
+  <section id="view-impacto" class="view">
+    <div class="card">
+      <div class="cat-head">
+        <div class="cat-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h2>Impacto Verde y Calculadora PyME</h2>
+          <span>Mide el ahorro ecológico y económico de tu tienda</span>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:14px;">
+        <div class="stat-card"><strong>1.840 kg</strong><span>CO₂ evitado este mes</span></div>
+        <div class="stat-card"><strong>42 min</strong><span>Promedio entrega urbana</span></div>
+      </div>
+
+      <label>Simulador para Emprendedores (Envíos semanales: <b id="simVal" style="color:#059669;">25</b>)</label>
+      <input type="range" id="simRange" min="5" max="150" value="25" style="padding:0; accent-color:#059669;">
+      <div class="res-box" id="simOut">
+        Con <b>25 envíos/semana</b> tu PyME evita <b>165 kg de CO₂ al mes</b> y ahorra <b>$85.000 CLP</b> frente a reparto tradicional.
+      </div>
+    </div>
+  </section>
+
+  <!-- VISTA 4: HUBS -->
+  <section id="view-hubs" class="view">
+    <div class="card">
+      <div class="cat-head">
+        <div class="cat-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div>
+          <h2>Electrolineras y Hubs Biobío</h2>
+          <span>Puntos de carga solar rápida y despacho</span>
+        </div>
+      </div>
+      <div class="hub-item">
+        <div class="hub-top"><b>⚡ Hub Plaza Independencia</b><span class="badge-ok">6 Activos</span></div>
+        <div>Concepción Centro • Horario: 08:00 a 20:30 hrs • Carga Solar 100%</div>
+      </div>
+      <div class="hub-item">
+        <div class="hub-top"><b>⚡ Hub Mall Plaza Trébol</b><span class="badge-ok">5 Activos</span></div>
+        <div>Hualpén / Talcahuano • Conexión Autopista y Av. Colón</div>
+      </div>
+      <div class="hub-item">
+        <div class="hub-top"><b>⚡ Hub Laguna Grande</b><span class="badge-ok">4 Activos</span></div>
+        <div>San Pedro de la Paz • Cruce rápido Puente Llacolén</div>
+      </div>
+      <div class="hub-item">
+        <div class="hub-top"><b>⚡ Hub Puerto Talcahuano</b><span class="badge-ok">3 Activos</span></div>
+        <div>Centro y Las Higueras • Cobertura comercio local y PyMEs</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISTA 5: MODO REPARTIDOR -->
+  <section id="view-admin" class="view">
+    <div class="card">
+      <div class="cat-head">
+        <div class="cat-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <div>
+          <h2>Panel de Control Repartidor</h2>
+          <span>Actualiza estados de entrega en tiempo real</span>
+        </div>
+      </div>
+      <div id="adminList"></div>
+      <button type="button" class="action-btn btn-dark" id="btnReset">Restaurar Pedidos de Ejemplo</button>
+    </div>
+  </section>
+
+</div>
+
+<footer>Eco Conce SpA • Logística Cero Emisiones • Gran Concepción, Biobío • 2026</footer>
+
+<script>
+(function() {
+  var STORAGE_KEY = 'ecoconce_tabs_v1';
+  var initialData = [
+    { c: 'ECO-101', o: 'Concepción Centro', d: 'Hualpén', r: 'Valentina Muñoz', dir: 'Av. Gran Bretaña 4120', e: 'En triciclo eléctrico', piloto: 'Diego V. (Trike #04)', co2: '1.65 kg', nota: 'Circulando por ciclovía Av. Colón' },
+    { c: 'ECO-202', o: 'Concepción Centro', d: 'San Pedro de la Paz', r: 'Sebastián Paredes', dir: 'Michimalonco 1150', e: 'Entregado', piloto: 'Carla M. (Trike #11)', co2: '1.50 kg', nota: 'Recibido conforme en conserjería' },
+    { c: 'ECO-303', o: 'Chiguayante', d: 'Talcahuano', r: 'Almacén El Faro', dir: 'Colón 540', e: 'En preparación', piloto: 'Matías R. (Trike #02)', co2: '3.10 kg', nota: 'Cargando paquete en Hub Chiguayante' }
+  ];
+
+  function getDB() {
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
+        return initialData.slice();
+      }
+      return JSON.parse(saved);
+    } catch (err) {
+      return initialData.slice();
+    }
+  }
+
+  function saveDB(list) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch (err) {}
+  }
+
+  // Cambio de pestañas separadas
+  function openTab(tabId) {
+    var views = document.querySelectorAll('.view');
+    var btns = document.querySelectorAll('.tab-btn');
+    views.forEach(function(v) { v.classList.remove('active'); });
+    btns.forEach(function(b) {
+      b.classList.remove('active');
+      if (b.getAttribute('data-tab') === tabId) b.classList.add('active');
+    });
+    var target = document.getElementById(tabId);
+    if (target) target.classList.add('active');
+    if (tabId === 'view-admin') renderPanel();
+  }
+
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.onclick = function() { openTab(this.getAttribute('data-tab')); };
+  });
+
+  // 1. Rastreo
+  function buscarCodigo(code) {
+    var c = (code || '').trim().toUpperCase();
+    var out = document.getElementById('out');
+    var item = getDB().find(function(x) { return x.c === c; });
+
+    if (!item) {
+      out.innerHTML = '<div class="res-box" style="background:#fef2f2;border-color:#dc2626;color:#b91c1c">❌ Código no encontrado. Prueba con <b>ECO-101</b>, <b>ECO-202</b> o <b>ECO-303</b>.</div>';
+      return;
+    }
+
+    var pct = item.e === 'Entregado' ? '100%' : (item.e === 'En triciclo eléctrico' ? '66%' : '33%');
+    out.innerHTML =
+      '<div class="res-box">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;"><b>📦 ' + item.c + '</b><span class="badge-ok">' + item.e + '</span></div>' +
+      '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '"></div></div>' +
+      '<div class="steps"><span>1. Hub</span><span>2. En triciclo</span><span>3. Entregado</span></div>' +
+      '<b>Ruta:</b> ' + item.o + ' → ' + item.d + '<br>' +
+      '<b>Destinatario:</b> ' + item.r + ' (' + item.dir + ')<br>' +
+      '<b>Vehículo:</b> ' + item.piloto + '<br>' +
+      '<b>Reporte:</b> <i>' + item.nota + '</i><br>' +
+      '🌱 Ahorro ecológico: <b>' + item.co2 + ' CO₂ evitados</b></div>';
+  }
+
+  document.getElementById('btnBuscar').onclick = function() { buscarCodigo(document.getElementById('cod').value); };
+  document.querySelectorAll('.pill').forEach(function(p) {
+    p.onclick = function() {
+      var c = this.getAttribute('data-code');
+      document.getElementById('cod').value = c;
+      buscarCodigo(c);
+    };
+  });
+
+  // 2. Cotizador
+  function actualizarCotizacion() {
+    var o = document.getElementById('ori').value;
+    var d = document.getElementById('des').value;
+    var ex = parseInt(document.getElementById('tam').value, 10) || 0;
+    var p = (o === d ? 2790 : 3490) + ex;
+    var min = o === d ? '30 min' : '45 min';
+    var co2 = (o === d ? 0.85 : 1.65).toFixed(2);
+    document.getElementById('precio').innerHTML =
+      'Tarifa estimada: <b>$' + p.toLocaleString('es-CL') + ' CLP</b><br>' +
+      '⏱️ Tiempo estimado: <b>' + min + '</b> • 🌱 Ahorro: <b>' + co2 + ' kg CO₂</b>';
+  }
+
+  document.getElementById('ori').onchange = actualizarCotizacion;
+  document.getElementById('des').onchange = actualizarCotizacion;
+  document.getElementById('tam').onchange = actualizarCotizacion;
+
+  document.getElementById('btnCrear').onclick = function() {
+    var r = document.getElementById('rec').value.trim();
+    var dir = document.getElementById('dir').value.trim();
+    if (!r || !dir) { alert('Completa el nombre del destinatario y la dirección.'); return; }
+    var o = document.getElementById('ori').value;
+    var d = document.getElementById('des').value;
+    var list = getDB();
+    var newCode = 'ECO-' + (400 + list.length + 1);
+    var co2 = (o === d ? 0.85 : 1.65).toFixed(2) + ' kg';
+
+    list.unshift({ c: newCode, o: o, d: d, r: r, dir: dir, e: 'En preparación', piloto: 'Asignación automática', co2: co2, nota: 'Orden ingresada en sistema' });
+    saveDB(list);
+
+    document.getElementById('nuevo').innerHTML =
+      '<div class="res-box">✅ Orden generada: <b>' + newCode + '</b> ' +
+      '<button type="button" class="btn-sm" id="btnIrRastreo" style="margin-left:8px;">Ver en Rastreo →</button></div>';
+
+    document.getElementById('btnIrRastreo').onclick = function() {
+      openTab('view-rastreo');
+      document.getElementById('cod').value = newCode;
+      buscarCodigo(newCode);
+    };
+
+    document.getElementById('rec').value = '';
+    document.getElementById('dir').value = '';
+  };
+
+  // 3. Simulador PyME
+  document.getElementById('simRange').oninput = function() {
+    var v = parseInt(this.value, 10);
+    document.getElementById('simVal').textContent = v;
+    var co2 = Math.round(v * 4 * 1.65);
+    var ahorro = (v * 4 * 850).toLocaleString('es-CL');
+    document.getElementById('simOut').innerHTML =
+      'Con <b>' + v + ' envíos/semana</b> tu PyME evita <b>' + co2 + ' kg de CO₂ al mes</b> y ahorra <b>$' + ahorro + ' CLP</b> frente a reparto tradicional.';
+  };
+
+  // 5. Panel Repartidor
+  function renderPanel() {
+    var box = document.getElementById('adminList');
+    var list = getDB();
+    box.innerHTML = '';
+    list.forEach(function(item, idx) {
+      var div = document.createElement('div');
+      div.className = 'hub-item';
+      div.innerHTML = '<b>' + item.c + '</b> (' + item.o + ' → ' + item.d + ')<br><small>Para: ' + item.r + ' • ' + item.dir + '</small>';
+
+      var sel = document.createElement('select');
+      sel.style.marginTop = '8px';
+      ['En preparación', 'En triciclo eléctrico', 'Entregado'].forEach(function(st) {
+        var opt = document.createElement('option');
+        opt.value = st;
+        opt.textContent = st;
+        if (item.e === st) opt.selected = true;
+        sel.appendChild(opt);
+      });
+
+      sel.onchange = function() {
+        var cur = getDB();
+        cur[idx].e = this.value;
+        cur[idx].nota = 'Actualizado por repartidor: ' + this.value;
+        saveDB(cur);
+      };
+
+      div.appendChild(sel);
+      box.appendChild(div);
+    });
+  }
+
+  document.getElementById('btnReset').onclick = function() {
+    saveDB(initialData.slice());
+    renderPanel();
+  };
+
+  actualizarCotizacion();
+})();
+</script>
+</body>
+</html>
